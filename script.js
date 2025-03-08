@@ -5,7 +5,6 @@ const startButton = document.getElementById("startButton");
 const subtitle = document.getElementById("subtitle");
 const questionAudio = document.getElementById("questionAudio");
 const questionImage = document.getElementById("questionImage");
-const userResponse = document.getElementById("userResponse");
 
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.lang = 'en-US';
@@ -48,12 +47,11 @@ function askQuestion() {
 
 recognition.onresult = (event) => {
     const transcript = event.results[0][0].transcript.trim();
-    userResponse.textContent = `You said: "${transcript}"`;
 
     if (checkAnswer(transcript)) {
-        handleCorrectAnswer();
+        currentQuestionIndex++;
+        setTimeout(askQuestion, 2000);
     } else {
-        userResponse.textContent += " ❌ Incorrect, try again!";
         setTimeout(askQuestion, 2000);
     }
 };
@@ -64,13 +62,6 @@ function checkAnswer(userAnswer) {
     return question.correctAnswers.some(correct => 
         userAnswer.toLowerCase().includes(correct.toLowerCase())
     );
-}
-
-// Function to handle correct answers
-function handleCorrectAnswer() {
-    userResponse.textContent += " ✅ Correct!";
-    currentQuestionIndex++;
-    setTimeout(askQuestion, 2000);
 }
 
 startButton.addEventListener("click", async () => {
