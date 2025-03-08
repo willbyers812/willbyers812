@@ -4,6 +4,7 @@ let currentQuestionIndex = 0;
 const startButton = document.getElementById("startButton");
 const subtitle = document.getElementById("subtitle");
 const questionAudio = document.getElementById("questionAudio");
+const questionImage = document.getElementById("questionImage");
 const userResponse = document.getElementById("userResponse");
 
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -31,7 +32,12 @@ function askQuestion() {
         questionAudio.load();
         questionAudio.play();
 
+        // Show image only while audio is playing
+        questionImage.src = question.image;
+        questionImage.style.display = "block";
+
         questionAudio.onended = () => {
+            questionImage.style.display = "none"; // Hide image after audio ends
             recognition.start();
         };
     } else {
