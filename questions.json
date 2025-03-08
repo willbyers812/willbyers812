@@ -2,11 +2,13 @@
     {
         "text": "What is your name?",
         "audio": "assets/question1.mp3",
-        "image": "assets/question1.jpg"
+        "image": "assets/question1.jpg",
+        "correctAnswers": ["John", "Jane", "Alex"]
     },
     {
         "text": "How are you feeling today?",
         "audio": "assets/question2.mp3",
-        "image": "assets/question2.jpg"
+        "image": "assets/question2.jpg",
+        "correctAnswers": ["Good", "Great", "Okay", "Happy"]
     }
 ]
